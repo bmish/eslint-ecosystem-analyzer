@@ -1,0 +1,13 @@
+/test
+/tests
+
+# misc
+/.editorconfig
+/.eslintignore
+/.eslintrc.js
+/.gitignore
+/.gitkeep
+/tmp/
+
+output/
+dist/
