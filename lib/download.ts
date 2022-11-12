@@ -30,15 +30,16 @@ export async function run(): Promise<void> {
     } "eslint-plugin" GitHub repositories to ${pathOutput}.`
   );
 
+  const pathSearchResultsDir = join(
+    PACKAGE_ROOT,
+    'output',
+    'github-search-results'
+  );
+  fs.mkdirSync(pathSearchResultsDir, { recursive: true });
   for (let page = 1; page <= PAGE_COUNT; page++) {
     console.log(`Page ${page}`);
 
-    const pathSearchResults = join(
-      PACKAGE_ROOT,
-      'output',
-      'github-search-results',
-      `${page}.json`
-    );
+    const pathSearchResults = join(pathSearchResultsDir, `${page}.json`);
 
     // Skip if already searched.
     if (fs.existsSync(pathSearchResults)) {
@@ -81,7 +82,7 @@ async function cloneRepositories(
       String(page)
     );
     if (!fs.existsSync(pathPageOfClonedRepositories)) {
-      fs.mkdirSync(pathPageOfClonedRepositories);
+      fs.mkdirSync(pathPageOfClonedRepositories, { recursive: true });
     }
 
     const repositoryFullName = repository.full_name.replace('/', '__');
